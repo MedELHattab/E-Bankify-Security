@@ -109,22 +109,19 @@ pipeline {
     }
 
     post {
-            always {
-                cleanWs()
-            }
-            success {
-                echo 'Pipeline executed successfully!'
-                emailext(
-                    subject: "Build Succeeded",
-                    body: "The Jenkins pipeline build was successful."
-                )
-            }
-            failure {
-                echo 'Pipeline execution failed!'
-                emailext(
-                    subject: "Build Failed",
-                    body: "The Jenkins pipeline build has failed."
-                )
-            }
+        success {
+            emailext(
+                to: 'elhattabmohammedelarbi@gmail.com',
+                subject: "Build Succeeded",
+                body: "The Jenkins pipeline build was successful."
+            )
         }
+        failure {
+            emailext(
+                to: 'elhattabmohammedelarbi@gmail.com',
+                subject: "Build Failed",
+                body: "The Jenkins pipeline build has failed."
+            )
+        }
+    }
 }

@@ -76,7 +76,7 @@ pipeline {
                     mvn sonar:sonar \
                         -Dsonar.projectKey=E-Bankify-Security \
                         -Dsonar.projectName=E-Bankify-Security \
-                        -Dsonar.host.url=http://sonarqube:9000 \
+                        -Dsonar.host.url=http://sonar:9000 \
                         -Dsonar.login=${SONAR_TOKEN}
                 '''
             }

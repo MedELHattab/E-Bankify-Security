@@ -6,7 +6,7 @@ pipeline {
     }
 
     environment {
-        DOCKER_IMAGE = 'E-Bankify-Security'
+        DOCKER_IMAGE = 'e-bankify-security'
         DOCKER_TAG = "${BUILD_NUMBER}"
         SONAR_TOKEN = credentials('jenkins-sonar')
         MAVEN_OPTS = '-Dmaven.test.failure.ignore=true'

@@ -156,7 +156,9 @@
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>3.0.0-M5</version>
 				<configuration>
-					<testFailureIgnore>true</testFailureIgnore>
+					<useModulePath>false</useModulePath> <!-- If using JUnit 5 -->
+					<forkCount>0</forkCount> <!-- Prevent multiple JVMs from being used during tests -->
+					<reuseForks>false</reuseForks>
 					<reportsDirectory>${project.build.directory}/surefire-reports</reportsDirectory>
 				</configuration>
 			</plugin>

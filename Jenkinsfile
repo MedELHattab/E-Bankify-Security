@@ -119,5 +119,10 @@ pipeline {
                      subject: "Pipeline Failure - eBankify",
                      body: "Le pipeline Jenkins a échoué. Veuillez vérifier les logs."
             }
+            unstable {
+                        mail to: 'elhattabmohammedelarbi@gmail.com',
+                             subject: "Pipeline Unstable - eBankify",
+                             body: "Le pipeline Jenkins est dans un état instable. Veuillez vérifier les logs et résoudre les tests échoués."
+                    }
         }
 }

@@ -60,12 +60,22 @@ pipeline {
             }
             post {
                 always {
-                    junit '**/target/surefire-reports/*.xml'
+                    junit '**/target/surefire-reports/*.xml' // Archive JUnit results
                     jacoco(
                         execPattern: '**/target/*.exec',
                         classPattern: '**/target/classes',
                         sourcePattern: '**/src/main/java'
                     )
+                }
+            }
+        }
+
+        // New stage to verify that the test reports are generated
+        stage('Verify Test Reports') {
+            steps {
+                script {
+                    echo "Verifying test results..."
+                    sh 'ls -la target/surefire-reports'  // Lists the test result files in the target/surefire-reports directory
                 }
             }
         }
@@ -109,20 +119,20 @@ pipeline {
     }
 
     post {
-            success {
-                mail to: 'elhattabmohammedelarbi@gmail.com',
-                     subject: "Pipeline Success - eBankify",
-                     body: "Le pipeline Jenkins s'est terminé avec succès !"
-            }
-            failure {
-                mail to: 'elhattabmohammedelarbi@gmail.com',
-                     subject: "Pipeline Failure - eBankify",
-                     body: "Le pipeline Jenkins a échoué. Veuillez vérifier les logs."
-            }
-            unstable {
-                        mail to: 'elhattabmohammedelarbi@gmail.com',
-                             subject: "Pipeline Unstable - eBankify",
-                             body: "Le pipeline Jenkins est dans un état instable. Veuillez vérifier les logs et résoudre les tests échoués."
-                    }
+        success {
+            mail to: 'elhattabmohammedelarbi@gmail.com',
+                 subject: "Pipeline Success - eBankify",
+                 body: "Le pipeline Jenkins s'est terminé avec succès !"
         }
+        failure {
+            mail to: 'elhattabmohammedelarbi@gmail.com',
+                 subject: "Pipeline Failure - eBankify",
+                 body: "Le pipeline Jenkins a échoué. Veuillez vérifier les logs."
+        }
+        unstable {
+            mail to: 'elhattabmohammedelarbi@gmail.com',
+                 subject: "Pipeline Unstable - eBankify",
+                 body: "Le pipeline Jenkins est dans un état instable. Veuillez vérifier les logs et résoudre les tests échoués."
+        }
+    }
 }

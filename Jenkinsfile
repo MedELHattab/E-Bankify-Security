@@ -109,19 +109,15 @@ pipeline {
     }
 
     post {
-        success {
-            emailext(
-                to: 'elhattabmohammedelarbi@gmail.com',
-                subject: "Build Succeeded",
-                body: "The Jenkins pipeline build was successful."
-            )
+            success {
+                mail to: 'elhattabmohammedelarbi@gmail.com',
+                     subject: "Pipeline Success - eBankify",
+                     body: "Le pipeline Jenkins s'est terminé avec succès !"
+            }
+            failure {
+                mail to: 'elhattabmohammedelarbi@gmail.com',
+                     subject: "Pipeline Failure - eBankify",
+                     body: "Le pipeline Jenkins a échoué. Veuillez vérifier les logs."
+            }
         }
-        failure {
-            emailext(
-                to: 'elhattabmohammedelarbi@gmail.com',
-                subject: "Build Failed",
-                body: "The Jenkins pipeline build has failed."
-            )
-        }
-    }
 }

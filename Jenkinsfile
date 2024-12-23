@@ -75,7 +75,6 @@ pipeline {
             steps {
                 script {
                     echo "Verifying test results..."
-                    sh 'ls -la target/surefire-reports'  // Lists the test result files in the target/surefire-reports directory
                 }
             }
         }

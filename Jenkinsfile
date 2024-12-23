@@ -60,14 +60,14 @@ pipeline {
             }
             post {
                 always {
-                    junit '**/target/surefire-reports/*.xml' // Archive JUnit results
-                    jacoco(
-                        execPattern: '**/target/*.exec',
-                        classPattern: '**/target/classes',
-                        sourcePattern: '**/src/main/java'
-                    )
+                    sh 'ls -la target/surefire-reports' // Lists the test result files in the target/surefire-reports directory
+                        jacoco(
+                            execPattern: '**/target/*.exec',
+                                classPattern: '**/target/classes',
+                                sourcePattern: '**/src/main/java'
+                              )
+                        }
                 }
-            }
         }
 
         // New stage to verify that the test reports are generated
@@ -75,6 +75,7 @@ pipeline {
             steps {
                 script {
                     echo "Verifying test results..."
+                    sh 'ls -la target/surefire-reports'  // Lists the test result files in the target/surefire-reports directory
                 }
             }
         }
